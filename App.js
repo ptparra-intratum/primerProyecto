@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import Main from './src/main/Main';
+import { NativeRouter, Route, Routes } from 'react-router-native';
+import { StatusBar } from 'react-native';
+import BarraNavegacion from './src/barraNavegacion/barraNavegacion';
+import DetallesInformacion from './src/detallesInformacion/detallesInformacion';
+import Calculadora from './src/calculadora/calculadora';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  function devolverValores(valor){
+      const { id } = valor;
+      return id;
+  }
+
+  return (
+      <NativeRouter>
+        <BarraNavegacion/>
+        <Routes>
+          <Route path='/' element={<Main/>}/>
+          <Route path='/informacion/:id' element={<DetallesInformacion/>}/>
+          <Route path='/calculadora' element={<Calculadora/>}/>
+        </Routes>
+        <StatusBar hidden/>
+      </NativeRouter>
+  )
+}
